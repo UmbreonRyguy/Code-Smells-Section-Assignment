@@ -4,8 +4,32 @@
 
 ___
 
-## Smell 1 - Global Data (pg 74 - 75) or Duplicated Code (pg 72)
+## Smell 1 - Duplicated Code (pg 72)
 
+```C++
+void input(char answers[], int size) {
+    cout << "Please enter the student's answers for each of the questions.\n";
+    cout << "Press Enter after typing each answer.\n";
+    cout << "Please enter only an A, B, C, D or a, b, c, d for each question.\n";
+
+    for (int i = 0; i < size; i++) {
+        cout << "Question " << (i + 1) << ": ";
+        cin >> answers[i];
+
+        while (answers[i] != 'A' && answers[i] != 'B'
+               && answers[i] != 'C' && answers[i] != 'D'
+               &&answers[i] != 'a' && answers[i] != 'b'
+               && answers[i] != 'c' && answers[i] != 'd') {
+            cout << "Use only an A, B, C, D or a, b, c, d!\n";
+            cout << "Please try again.\n";
+            cout << "Question " << (i + 1) << ": ";
+            cin >> answers[i];
+        }
+    }
+}
+```
+
+The code above is an example of Duplicated Code smells. The code within the while loop repeatedly uses the same inequality statement to check the verify valid answers chosen, increasing the potential of future mistakes due to a larger portion of code to monitor and maintain at a given time.
 ___
 
 ## Smell 2 - Mysterious Name (pg 72) (C#)
