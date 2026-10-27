@@ -34,12 +34,16 @@ ___
 
 ## Smell 2 - Mysterious Name (pg 72) (C#)
 
+Mysterious Name code smells are caused by when a programmer uses any random name or letter as a variable, while not describing what that variable means, making it very difficult to actually know what it is, and what it affects.
+
+Practices for preventing these code smells are using descript names for variables, or including comments that tell the user or another programmer what those variables actually are.
+
 ```C#
 // This is a movement script for a Unity GameObject written in C#
 public class MovementScript : MonoBehaviour
 {
-    public float x = 5f;
-    public float y = 180f;
+    public float x = 5f; // change x to moveSpeed
+    public float y = 180f; // change y to rotationSpeed
     private Vector2 movementInput;
     public void OnMove(InputValue value)
     {
@@ -47,15 +51,13 @@ public class MovementScript : MonoBehaviour
     }
     void Update()
     {
-        float z = movementInput.y;
-        float x2 = movementInput.x;
-        transform.Translate(Vector3.forward * z * x * Time.deltaTime, Space.Self);
-        transform.Rotate(Vector3.up * x2 * y * Time.deltaTime);
+        float z = movementInput.y; // change z to moveInput
+        float x2 = movementInput.x; // change x2 to rotateInput
+        transform.Translate(Vector3.forward * z * x * Time.deltaTime, Space.Self); // change z to moveInput and x to moveSpeed
+        transform.Rotate(Vector3.up * x2 * y * Time.deltaTime); // change x2 to rotateInput and y to rotationSpeed
     }
 }
 ```
-
-The code above is an example of Myseterious Name code smells. The code is full of randomly named variables that another person reading has no idea of knowing what these actually mean or reference. 
 ___
 
 ## Smell 3 - Comments (pg 84) (Python)
