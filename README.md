@@ -99,9 +99,6 @@ ___
 ## Smell 3 - Comments (pg 84) (Python)
 
 ```python
-# ==========================================
-# COUNTER INCREMENT FUNCTION
-# ==========================================
 # This function is used to increment a count by one.
 # It takes an integer parameter and returns an integer.
 def increment_counter(current_count):
@@ -115,12 +112,15 @@ def increment_counter(current_count):
     else:
         # If it is None, return 0
         return 0
-
 ```
 The code above is an example of the code smell comments. The code is overly commented which means it might be hiding bad code, which this code is. The function is self explanatory and only really needs one comment to explain what is doing, rather than a comment on each line explaining every part of the function. If the code required comments on every line, it should be be refactored using an extract function to make the starting function simpler. In this case, all thats needed is to simplify the syntax of the code and trim the comments to be more concise. 
 
-
-
+```python
+# Increments current count count by one, returning 0 if the count is None.
+def increment_counter(current_count):
+    return 0 if current_count is None else current_count + 1
+```
+After refactoring, the function is simplified to one line and can be completly described by one comment, making it much easier for another programmer to understand quickly just at a glance. 
 
 
 
