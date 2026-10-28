@@ -76,6 +76,7 @@ Practices for preventing these code smells are using descript names for variable
 
 ```C#
 // This is a movement script for a Unity GameObject written in C#
+// BEFORE
 public class MovementScript : MonoBehaviour
 {
     public float x = 5f; // change x to moveSpeed
@@ -93,6 +94,26 @@ public class MovementScript : MonoBehaviour
         transform.Rotate(Vector3.up * x2 * y * Time.deltaTime); // change x2 to rotateInput and y to rotationSpeed
     }
 }
+
+// AFTER
+public class MovementScript : MonoBehaviour
+{
+    public float moveSpeed = 5f;
+    public float rotationSpeed = 180f;
+    private Vector2 movementInput;
+    public void OnMove(InputValue value)
+    {
+        movementInput = value.Get<Vector2>();
+    }
+    void Update()
+    {
+        float moveInput = movementInput.y;
+        float rotateInput = movementInput.x;
+        transform.Translate(Vector3.forward * moveInput * moveSpeed * Time.deltaTime, Space.Self);
+        transform.Rotate(Vector3.up * rotateInput * rotationSpeed * Time.deltaTime);
+    }
+}
+
 ```
 ___
 
