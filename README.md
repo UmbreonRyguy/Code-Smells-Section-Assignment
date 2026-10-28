@@ -79,8 +79,8 @@ Practices for preventing these code smells are using descript names for variable
 // BEFORE
 public class MovementScript : MonoBehaviour
 {
-    public float x = 5f; // change x to moveSpeed
-    public float y = 180f; // change y to rotationSpeed
+    public float x = 5f;
+    public float y = 180f;
     private Vector2 movementInput;
     public void OnMove(InputValue value)
     {
@@ -88,10 +88,10 @@ public class MovementScript : MonoBehaviour
     }
     void Update()
     {
-        float z = movementInput.y; // change z to moveInput
-        float x2 = movementInput.x; // change x2 to rotateInput
-        transform.Translate(Vector3.forward * z * x * Time.deltaTime, Space.Self); // change z to moveInput and x to moveSpeed
-        transform.Rotate(Vector3.up * x2 * y * Time.deltaTime); // change x2 to rotateInput and y to rotationSpeed
+        float z = movementInput.y;
+        float x2 = movementInput.x;
+        transform.Translate(Vector3.forward * z * x * Time.deltaTime, Space.Self);
+        transform.Rotate(Vector3.up * x2 * y * Time.deltaTime);
     }
 }
 
