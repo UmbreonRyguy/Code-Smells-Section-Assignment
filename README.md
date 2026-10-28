@@ -7,8 +7,13 @@ ___
 ## Smell 1 - Duplicated Code (pg 72)
 
 ```C++
+//=================================//
+    BEFORE: Duplicated Code Smell
+//=================================//
+//#include <cctype> //add libary header to use toupper()
 void input(char answers[], int size) {
-    cout << "Please enter the student's answers for each of the questions.\n";
+    //condense printing
+    cout << "Please enter the student's answers for each of the questions.\n"; 
     cout << "Press Enter after typing each answer.\n";
     cout << "Please enter only an A, B, C, D or a, b, c, d for each question.\n";
 
@@ -16,20 +21,51 @@ void input(char answers[], int size) {
         cout << "Question " << (i + 1) << ": ";
         cin >> answers[i];
 
-        while (answers[i] != 'A' && answers[i] != 'B'
+        //add answers[i] = toupper(answers[i]);
+
+        //change while loop to do while loop
+        while (answers[i] != 'A' && answers[i] != 'B' 
                && answers[i] != 'C' && answers[i] != 'D'
-               &&answers[i] != 'a' && answers[i] != 'b'
-               && answers[i] != 'c' && answers[i] != 'd') {
-            cout << "Use only an A, B, C, D or a, b, c, d!\n";
-            cout << "Please try again.\n";
+               && answers[i] != 'a' && answers[i] != 'b'       //remove && answers[i] != 'a' && answers[i] != 'b' 
+               && answers[i] != 'c' && answers[i] != 'd') {    //remove && answers[i] != 'c' && answers[i] != 'd'
+            cout << "Use only an A, B, C, D or a, b, c, d!\n"; //add if statement to verify valid answers
+            cout << "Please try again.\n";                     //condense printing
+            cout << "Question " << (i + 1) << ": ";            //remove duplicated code
+            cin >> answers[i];                                 //remove duplicated code
+        } 
+    }
+}
+//================//
+    AFTER: Fixed
+//================//
+#include <cctype> 
+void input(char answers[], int size) {
+    cout << "Please enter the student's answers for each of the questions.\n"
+         << "Press Enter after typing each answer.\n"
+         << "Please enter only an A, B, C, D or a, b, c, d for each question.\n";
+
+    for (int i = 0; i < size; i++) {
+        do { 
             cout << "Question " << (i + 1) << ": ";
             cin >> answers[i];
-        }
+            answers[i] = toupper(answers[i]);
+
+            if(answers[i] != 'A' && answers[i] != 'B' 
+               && answers[i] != 'C' && answers[i] != 'D'){
+                cout << "Use only an A, B, C, D or a, b, c, d!\n" 
+                     << "Please try again.\n";
+               }
+        } while (answers[i] != 'A' && answers[i] != 'B' 
+               && answers[i] != 'C' && answers[i] != 'D');
     }
 }
 ```
 
-The code above is an example of Duplicated Code smells. The code within the while loop repeatedly uses the same inequality statement to check the verify valid answers chosen, increasing the potential of future mistakes due to a larger portion of code to monitor and maintain at a given time.
+The code above is an example of Duplicated Code smells. Duplicated Code smell is repetitive code that appears multiple times throughout a program. It arises from repeated application of the same logic. This can be problematic since it can overtime make code more difficult to maintain, which increases the potential risk of inconsistent changes and errors. 
+
+Duplicated code smell can be prevented by extracting repeated statements into functions or classes and using loops or iteration to name a few.
+
+Reduced readability, increase maintenance difficulty, and increased risk of errors are problems that this duplicated code smell example creates. This duplicated code smell can be fix by using toupper() function to help eliminate the need to check both cases for each letter, and a do while loop that helps eliminate the repeated logic of prompted the user for answers before and during the loop. These changes help to improve the readability, maintainability, and help to reduce the risk of other errors down the line.
 ___
 
 ## Smell 2 - Mysterious Name (pg 72) (C#)
